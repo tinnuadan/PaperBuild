@@ -1,0 +1,22 @@
+From a9042d1207dfc0d14c3420e28584d0f6d48df08f Mon Sep 17 00:00:00 2001
+From: tinnuadan <tinnuadan@gmail.com>
+Date: Fri, 7 Aug 2020 08:16:28 +0200
+Subject: [PATCH] local fixes for init.sh
+
+---
+ scripts/init.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/init.sh b/scripts/init.sh
+index 25aa24bcf7..4f251c0413 100755
+--- a/scripts/init.sh
++++ b/scripts/init.sh
+@@ -11,7 +11,7 @@ nms="$spigotdecompiledir/net/minecraft/server"
+ cb="src/main/java/net/minecraft/server"
+ gitcmd="git -c commit.gpgsign=false"
+ 
+-patch=$(which patch 2>/dev/null)
++patch="/usr/bin/patch"
+ if [ "x$patch" == "x" ]; then
+     patch="$basedir/hctap.exe"
+ fi
