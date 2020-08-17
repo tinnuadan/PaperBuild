@@ -1,17 +1,26 @@
 #/bin/bash
 
+#rootdir=$(pwd)
 rootdir=$(pwd)
+source <(grep = config.ini)
+
 
 if $(test -d "Paper"); then
   cd Paper
   git reset --hard HEAD
+  git checkout "$branch"
+  git fetch
+  git rebase HEAD
 else
   git clone https://github.com/PaperMC/Paper.git
   cd Paper
+  git checkout "$branch"
 fi
 
-# apply init fix first
-git apply "$rootdir/init_sh.patch"
+exit
+# apply fixes first
+git apply "$rootdir/patches/init_sh.patch"
+git apply "$rootdir/patches/build_sh.patch"
 
 # apply all other fixes
 for patch in $rootdir/patches/*.patch; do 

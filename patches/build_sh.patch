@@ -1,0 +1,21 @@
+From fcad3791f8aa733fac9e36a2719034d810d8fc86 Mon Sep 17 00:00:00 2001
+From: tinnuadan <tinnuadan@gmail.com>
+Date: Mon, 17 Aug 2020 08:54:08 +0200
+Subject: [PATCH] injecting blacklist reverting
+
+---
+ scripts/build.sh | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/scripts/build.sh b/scripts/build.sh
+index 9b8fa286a7..de74da90c1 100755
+--- a/scripts/build.sh
++++ b/scripts/build.sh
+@@ -9,6 +9,7 @@ gitcmd="git -c commit.gpgsign=false"
+     echo "Failed to build Paper"
+     exit 1
+ ) || exit 1
++python3 $basedir/../revert_blacklist.py
+ if [ "$2" == "--jar" ]; then
+     mvn clean install && ./scripts/paperclip.sh "$basedir"
+ fi
