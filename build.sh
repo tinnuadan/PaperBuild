@@ -17,17 +17,9 @@ else
   git checkout "$branch"
 fi
 
-exit
 # apply fixes first
 git apply "$rootdir/patches/init_sh.patch"
 git apply "$rootdir/patches/build_sh.patch"
-
-# apply all other fixes
-for patch in $rootdir/patches/*.patch; do 
-  echo "Applying $patch"
-  git apply $patch
-done
-
 
 echo "Starting build"
 ./paper jar

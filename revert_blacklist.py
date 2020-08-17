@@ -21,9 +21,9 @@ def revert(file):
 
   # eliminate duplicates
   patches = set(patches)
-  print(patches)
 
   for patch in patches:
+    print(f"Reverting {patch}")
     run(["git","apply","-R",patch])
 
 
