@@ -24,5 +24,9 @@ git apply "$rootdir/patches/build_sh.patch"
 echo "Starting build"
 ./paper jar
 
+if $(test ! -d build);
+then
+  mkdir "build";
+fi
 date=$(date +"%Y_%m_%d")
-cp "paperclip.jar" "$rootdir/paper_$date.jar"
+cp "paperclip.jar" "$rootdir/build/paper_$date.jar"
