@@ -17,6 +17,9 @@ else
   git checkout "$branch"
 fi
 
+# set java options
+export _JAVA_OPTIONS="$java_options"
+
 # apply fixes first
 git apply "$rootdir/patches/init_sh.patch"
 git apply "$rootdir/patches/build_sh.patch"
@@ -24,9 +27,10 @@ git apply "$rootdir/patches/build_sh.patch"
 echo "Starting build"
 ./paper jar
 
-if $(test ! -d build);
+output = "build/$branch"
+if $(test ! -d $output);
 then
-  mkdir "build";
+  mkdir "$output";
 fi
 date=$(date +"%Y_%m_%d")
-cp "paperclip.jar" "$rootdir/build/paper_$date.jar"
+cp "paperclip.jar" "$rootdir/$output/paper_$date.jar"
