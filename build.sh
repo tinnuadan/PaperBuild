@@ -27,10 +27,10 @@ git apply "$rootdir/patches/build_sh.patch"
 echo "Starting build"
 ./paper jar
 
-output = "build/$branch"
+output="build/$branch"
 if $(test ! -d $output);
 then
-  mkdir "$output";
+  mkdir -p "$output";
 fi
 date=$(date +"%Y_%m_%d")
 cp "paperclip.jar" "$rootdir/$output/paper_$date.jar"
