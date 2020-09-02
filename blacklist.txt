@@ -1,1 +1,2 @@
 fix-sand-duping.patch
+validate-pickitem-packet-and-kick-for-invalid.patch
