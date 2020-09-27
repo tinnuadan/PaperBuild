@@ -9,8 +9,8 @@ if $(test -d "Paper"); then
   cd Paper
   git reset --hard HEAD
   git checkout "$branch"
-  git fetch
-  git rebase HEAD
+  git reset --hard HEAD
+  git pull --rebase
 else
   git clone https://github.com/PaperMC/Paper.git
   cd Paper
