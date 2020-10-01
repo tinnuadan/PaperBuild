@@ -35,4 +35,5 @@ fi
 workdir="work"
 minecraftversion=$(cat "$workdir/BuildData/info.json"  | grep minecraftVersion | cut -d '"' -f 4)
 date=$(date +"%Y-%m-%d")
-cp "paperclip.jar" "$output/paper_$minecraftversion_$date.jar"
+echo "Copying to \"$output/paper_${minecraftversion}_${date}.jar\""
+cp "paperclip.jar" "$output/paper_${minecraftversion}_${date}.jar"
