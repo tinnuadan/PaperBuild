@@ -32,5 +32,7 @@ if $(test ! -d $output);
 then
   mkdir -p "$output";
 fi
-date=$(date +"%Y_%m_%d")
-cp "paperclip.jar" "$output/paper_$date.jar"
+workdir="work"
+minecraftversion=$(cat "$workdir/BuildData/info.json"  | grep minecraftVersion | cut -d '"' -f 4)
+date=$(date +"%Y-%m-%d")
+cp "paperclip.jar" "$output/paper_$minecraftversion_$date.jar"
