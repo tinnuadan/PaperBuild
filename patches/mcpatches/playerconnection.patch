@@ -1,0 +1,12 @@
+--- PlayerConnection.java	2020-10-03 07:45:18.156240261 +0200
++++ PlayerConnectionPatched.java	2020-10-03 07:48:52.546465660 +0200
+@@ -1660,7 +1660,9 @@
+             this.player.resetIdleTimer();
+         } else {
+             PlayerConnection.LOGGER.warn("{} tried to set an invalid carried item", this.player.getDisplayName().getString());
++            /* Disable for empty hand
+             this.disconnect("Invalid hotbar selection (Hacking?)"); // CraftBukkit
++            */
+         }
+     }
+ 
