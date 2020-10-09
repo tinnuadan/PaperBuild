@@ -7,9 +7,12 @@ source <(grep = config.ini)
 
 if $(test -d "Paper"); then
   cd Paper
+  git clean -dfx
+  git submodule foreach clean -dfx
   git reset --hard HEAD
   git checkout "$branch"
   git reset --hard HEAD
+  git submodule foreach reset --hard HEAD
   git pull --rebase
 else
   git clone https://github.com/PaperMC/Paper.git
