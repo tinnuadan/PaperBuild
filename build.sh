@@ -2,7 +2,8 @@
 
 #rootdir=$(pwd)
 rootdir=$(pwd)
-source <(grep = config.ini)
+# read config but get rid of windows-style line feeds first
+source <(grep = config.ini | sed 's/\r//g')
 
 
 if $(test -d "Paper"); then
