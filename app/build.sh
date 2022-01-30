@@ -44,5 +44,11 @@ spigotversion=$(cat "$workdir/BuildData/info.json"  | grep spigotVersion | cut -
 date=$(date +"%Y-%m-%d")
 echo "Copying ${build_file} to \"$output/paper-${minecraftversion}_${date}.jar\""
 cp "$paper_out/$build_file" "$output/paper-${minecraftversion}_${date}.jar"
-echo "Creating symbolic link $output/paper-${minecraftversion}_latest.jar"
-ln -s "$output/paper-${minecraftversion}_${date}.jar" "$output/paper-${minecraftversion}_latest.jar"
+
+# removing all but the n latest builds
+echo "Removing old builds"
+n=5
+cd $output
+ls -tp | grep -v '/$' | grep -v '^l' | tail -n +$(expr $n + 1) | xargs -I {} rm -- {}
+echo "Creating symbolic link paper-${minecraftversion}_latest.jar"
+ln -s "paper-${minecraftversion}_${date}.jar" "paper-${minecraftversion}_latest.jar"
