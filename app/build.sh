@@ -1,6 +1,7 @@
 #/bin/bash
 
-rootdir=$(dirname $0)
+rootdir=$(readlink -f $0)
+rootdir=$(dirname $rootdir)
 cd $rootdir
 # read config but get rid of windows-style line feeds first
 source <(grep = config.ini | sed 's/\r//g')
@@ -26,10 +27,16 @@ export _JAVA_OPTIONS="$java_options"
 
 # blacklist patches
 python3 $rootdir/blacklist_patches.py "${rootdir}/blacklist.txt"
+if $(test $? -ne 0); then
+  exit $?
+fi
 
 echo "Starting build"
-./gradlew applyPatches
-./gradlew createReobfBundlerJar
+./gradlew applyPatches && ./gradlew createReobfBundlerJar
+
+if $(test $? -ne 0); then
+  exit $?
+fi
  
 output="$rootdir/build/"
 if $(test ! -d $output);
