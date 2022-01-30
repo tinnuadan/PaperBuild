@@ -1,8 +1,0 @@
-{
-    "playerconnection" : {
-        "topatch" : [
-            "work/Spigot/Spigot-Server/src/main/java/net/minecraft/server/PlayerConnection.java",
-            "Paper-Server/src/main/java/net/minecraft/server/PlayerConnection.java"
-        ]
-    }
-}
