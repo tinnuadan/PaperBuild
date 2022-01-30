@@ -1,18 +1,34 @@
 # our base image
-FROM alpine:3.5
+FROM ubuntu:latest
 
-# Install python and pip
-RUN apk add --update python3 git
+# Set timezone
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# update from repo
-RUN git pull --rebase
+# Install packages
+RUN apt-get update
+RUN apt-get install git python3 -y
+RUN apt-get install openjdk-17-jre-headless -y
+
+# Write dummy git config
+RUN git config --global user.email "mail@example.com"
+RUN git config --global user.name "John Doe"
+
+#HERE
 
 # copy files required for the app to run
-COPY app /usr/src/app/
-COPY config.ini /usr/src/app/
+COPY app /app/
+COPY config.ini /app/
+RUN mkdir /app/build
+RUN chmod +x /app/build.sh
 
 # tell the port number the container should expose
-#EXPOSE 5000
+# EXPOSE 80
 
 # run the application
-CMD ["bash", "/usr/src/app/build.sh"]
+CMD ["bash", "/app/build.sh"]
+
+#CMD ["/app/build.sh"]
+
+# to get the compiled files do:
+# docker cp <containerId>:/app/build/ /host/target_path/%     

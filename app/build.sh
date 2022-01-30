@@ -1,6 +1,7 @@
 #/bin/bash
 
-rootdir=$(pwd)
+rootdir=$(dirname $0)
+cd $rootdir
 # read config but get rid of windows-style line feeds first
 source <(grep = config.ini | sed 's/\r//g')
 
@@ -30,7 +31,7 @@ echo "Starting build"
 ./gradlew applyPatches
 ./gradlew createReobfBundlerJar
  
-output="$rootdir/build/$branch"
+output="$rootdir/build/"
 if $(test ! -d $output);
 then
   mkdir -p "$output";
@@ -43,3 +44,5 @@ spigotversion=$(cat "$workdir/BuildData/info.json"  | grep spigotVersion | cut -
 date=$(date +"%Y-%m-%d")
 echo "Copying ${build_file} to \"$output/paper-${minecraftversion}_${date}.jar\""
 cp "$paper_out/$build_file" "$output/paper-${minecraftversion}_${date}.jar"
+echo "Creating symbolic link $output/paper-${minecraftversion}_latest.jar"
+ln -s "$output/paper-${minecraftversion}_${date}.jar" "$output/paper-${minecraftversion}_latest.jar"
